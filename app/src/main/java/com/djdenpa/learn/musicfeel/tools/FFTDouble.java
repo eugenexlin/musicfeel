@@ -1,0 +1,84 @@
+package com.djdenpa.learn.musicfeel.tools;
+
+/**
+ * Created by H on 2017/02/04.
+ */
+
+public class FFTDouble {
+
+    int n, m;
+
+    // Lookup tables. Only need to recompute when size of FFTDouble changes.
+    double[] cos;
+    double[] sin;
+
+    public FFTDouble(int n) {
+        this.n = n;
+        this.m = (int) (Math.log(n) / Math.log(2));
+
+        // Make sure n is a power of 2
+        if (n != (1 << m))
+            throw new RuntimeException("FFTDouble length must be power of 2");
+
+        // precompute tables
+        cos = new double[n / 2];
+        sin = new double[n / 2];
+
+        for (int i = 0; i < n / 2; i++) {
+            cos[i] = Math.cos(-2 * Math.PI * i / n);
+            sin[i] = Math.sin(-2 * Math.PI * i / n);
+        }
+
+    }
+
+    public void fft(double[] input, double[] output) {
+        int i, j, k, n1, n2, a;
+        double c, s, t1, t2;
+
+        // Bit-reverse
+        j = 0;
+        n2 = n / 2;
+        for (i = 1; i < n - 1; i++) {
+            n1 = n2;
+            while (j >= n1) {
+                j = j - n1;
+                n1 = n1 / 2;
+            }
+            j = j + n1;
+
+            if (i < j) {
+                t1 = input[i];
+                input[i] = input[j];
+                input[j] = t1;
+                t1 = output[i];
+                output[i] = output[j];
+                output[j] = t1;
+            }
+        }
+
+        // FFTDouble
+        n1 = 0;
+        n2 = 1;
+
+        for (i = 0; i < m; i++) {
+            n1 = n2;
+            n2 = n2 + n2;
+            a = 0;
+
+            for (j = 0; j < n1; j++) {
+                c = cos[a];
+                s = sin[a];
+                a += 1 << (m - i - 1);
+
+                for (k = j; k < n; k = k + n2) {
+                    t1 = c * input[k + n1] - s * output[k + n1];
+                    t2 = s * input[k + n1] + c * output[k + n1];
+                    input[k + n1] = input[k] - t1;
+                    output[k + n1] = output[k] - t2;
+                    input[k] = input[k] + t1;
+                    output[k] = output[k] + t2;
+                }
+            }
+        }
+    }
+}
