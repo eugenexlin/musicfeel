@@ -4,9 +4,7 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.support.v4.view.MotionEventCompat;
-import android.view.Display;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
@@ -15,8 +13,8 @@ import android.view.SurfaceView;
 import android.view.WindowManager;
 import android.widget.Scroller;
 
-import com.djdenpa.learn.musicfeel.screenDrawer.FFTScreenDrawer;
-import com.djdenpa.learn.musicfeel.screenDrawer.IScreenDrawer;
+import com.djdenpa.learn.musicfeel.screendrawer.FFTScreenDrawer;
+import com.djdenpa.learn.musicfeel.screendrawer.IScreenDrawer;
 import com.djdenpa.learn.musicfeel.tools.DebugLogger;
 
 import org.apache.log4j.Logger;
@@ -216,7 +214,9 @@ public class VisualScanView extends SurfaceView implements SurfaceHolder.Callbac
                         FFTScreenDrawer draw =   ((FFTScreenDrawer) mDrawer);
                         draw.channel = (draw.channel+1) % 2;
                     }catch(Exception ex)
-                    {}
+                    {
+                        //do nothing
+                    }
                 }
                 break;
             }
@@ -264,6 +264,7 @@ public class VisualScanView extends SurfaceView implements SurfaceHolder.Callbac
                     mDrawer.terminate();
                     retry = false;
                 } catch (InterruptedException e) {
+                    //not much we can do here i think.
                 }
             }
         }

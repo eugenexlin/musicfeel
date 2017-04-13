@@ -1,7 +1,5 @@
 package com.djdenpa.learn.musicfeel.tools;
 
-import android.util.Log;
-
 import junit.framework.Assert;
 
 /**

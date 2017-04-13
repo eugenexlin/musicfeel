@@ -1,9 +1,11 @@
-package com.djdenpa.learn.musicfeel.tools.BeatDetection;
+package com.djdenpa.learn.musicfeel.tools.beatdetection;
 
 import java.util.Comparator;
 
 /**
  * Created by H on 2017/02/12.
+ *
+ * Compares the importance of a beat bucket
  */
 
 public class BeatComparator implements Comparator<BeatBucket> {

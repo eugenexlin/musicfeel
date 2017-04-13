@@ -1,9 +1,8 @@
-package com.djdenpa.learn.musicfeel.tools.BeatDetection;
+package com.djdenpa.learn.musicfeel.tools.beatdetection;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
-import java.util.PriorityQueue;
 
 /**
  * Created by H on 2017/02/12.

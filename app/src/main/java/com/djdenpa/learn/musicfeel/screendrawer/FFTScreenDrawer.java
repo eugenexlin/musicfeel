@@ -1,4 +1,4 @@
-package com.djdenpa.learn.musicfeel.screenDrawer;
+package com.djdenpa.learn.musicfeel.screendrawer;
 
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -89,7 +89,7 @@ public class FFTScreenDrawer implements IScreenDrawer {
             int colIndex = 0;
             while(indexX < FFTData[channel][indexY].length && currentX < mView.getWidth()){
                 float val = (int) (FFTData[channel][indexY][indexX]);
-                val = val*5.5f + 00;
+                val = val*5.5f + 0;
                 if (val > 255){
                     val = 255;
                 }

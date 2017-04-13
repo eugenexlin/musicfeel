@@ -1,13 +1,11 @@
-package com.djdenpa.learn.musicfeel.screenDrawer;
+package com.djdenpa.learn.musicfeel.screendrawer;
 
-import com.djdenpa.learn.musicfeel.tools.BeatDetection.BeatBucket;
-import com.djdenpa.learn.musicfeel.tools.BeatDetection.BeatComparator;
-import com.djdenpa.learn.musicfeel.tools.BeatDetection.BeatDetector;
+import com.djdenpa.learn.musicfeel.tools.beatdetection.BeatBucket;
+import com.djdenpa.learn.musicfeel.tools.beatdetection.BeatComparator;
+import com.djdenpa.learn.musicfeel.tools.beatdetection.BeatDetector;
 import com.djdenpa.learn.musicfeel.tools.DebugLogger;
-import com.djdenpa.learn.musicfeel.tools.FFTDouble;
 import com.djdenpa.learn.musicfeel.tools.FFTFloat;
 import com.djdenpa.learn.musicfeel.tools.FFTUtils;
-import com.djdenpa.learn.musicfeel.tools.GeneralFFT;
 import com.djdenpa.learn.musicfeel.tools.WavFile;
 import com.djdenpa.learn.musicfeel.tools.WavFileException;
 
@@ -18,7 +16,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.PriorityQueue;
 
 /**
  * Created by H on 2017/02/04.
@@ -86,7 +83,7 @@ public class FFTScreenDrawerRunnable implements Runnable {
     @Override
     public void run() {
         int numChannels = oWavFile.getNumChannels();
-        int framesRead = 0;
+        int framesRead;
         int bitRate = (int) oWavFile.getSampleRate();
         //log.info(bitRate);
         double[][] readBuffer = new double[numChannels][mStepSize];
@@ -106,9 +103,7 @@ public class FFTScreenDrawerRunnable implements Runnable {
             //inch down the buffer for area not covered by step of reading WAV
             if(copyOffset > 0) {
                 for (int channel = 0; channel < readBuffer.length; channel++) {
-                    for(int index = 0; index < copyOffset; index++){
-                        choochooBuffer[channel][index] = choochooBuffer[channel][index+mStepSize];
-                    }
+                    System.arraycopy(choochooBuffer[channel], 0 + mStepSize, choochooBuffer[channel], 0, copyOffset);
                 }
             }
 
@@ -167,7 +162,7 @@ public class FFTScreenDrawerRunnable implements Runnable {
 
 
 
-    private native float[] calcFFTReal(float[] real, float[] imaginary, int size);
+    //private native float[] calcFFTReal(float[] real, float[] imaginary, int size);
 
     static {
         System.loadLibrary("MusicFeelNLib");

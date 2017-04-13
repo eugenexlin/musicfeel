@@ -3,27 +3,15 @@ package com.djdenpa.learn.musicfeel;
 import com.djdenpa.learn.musicfeel.tools.DebugLogger;
 import com.djdenpa.learn.musicfeel.tools.PCMAudioAnalyzer;
 
-import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.Intent;
 import android.database.Cursor;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Point;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
 import android.view.SurfaceView;
-import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import org.apache.log4j.Logger;
-
-import java.util.Random;
 
 public class VisualScanMusicActivity extends AppCompatActivity {
 

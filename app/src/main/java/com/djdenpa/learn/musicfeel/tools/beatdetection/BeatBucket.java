@@ -1,11 +1,12 @@
-package com.djdenpa.learn.musicfeel.tools.BeatDetection;
-
-import java.util.ArrayList;
-import java.util.PriorityQueue;
-import java.util.Queue;
+package com.djdenpa.learn.musicfeel.tools.beatdetection;
 
 /**
  * Created by H on 2017/02/12.
+ *
+ * IF beats are close enough to it
+ * maybe guess it is the same type/timing of beat
+ * so have this shifting average
+ *
  */
 
 public class BeatBucket {
